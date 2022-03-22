@@ -1,23 +1,23 @@
 <div class="card">
   <div class="card-header">{{ titulo }}</div>
   <div class="card-body">
-    <form >
+    <form [formGroup]="form">
       <div class="form-group row">
         <label for="title" class="col-form-label col-sm-2">Titulo</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" name="title" [(ngModel)]="tasking.title">
+          <input type="text" class="form-control" name="title" formControlName="title">
         </div>
       </div>
       <div class="form-group row">
         <label for="description" class="col-form-label col-sm-2">Descripcion</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" name="apellido" [(ngModel)]="tasking.description">
+          <input type="text" class="form-control" name="apellido" formControlName="description">
         </div>
       </div>
       <div class="form-group row">
         <label for="executionDate" class="col-form-label col-sm-2">Fecha de ejecucion</label>
         <mat-form-field appearance="fill">
-          <input matInput [matDatepicker]="picker" [value]="tasking.executionDate">
+          <input matInput [matDatepicker]="picker" formControlName="executionDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -25,14 +25,14 @@
       <div class="form-group row">
         <label for="empleado" class="col-form-label col-sm-2">Empleado</label>
         <div class="col-sm-6">
-          <select class="form-control" name="porcentajes" [(ngModel)]="empleadoSeleccionado" required="required" >
+          <select class="form-control" name="porcentajes" formControlName="employId" required="required" >
             <option *ngFor="let employ of empleados" value="{{employ.id}}">{{employ.firstName}} {{employ.lastName}}</option>
           </select>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" (click)="create()" *ngIf="(!tasking.id && tasking.id != 0) else elseBlock">Crear</button>
+          <button class="btn btn-primary" (click)="create()" *ngIf="isAddMode; else elseBlock">Crear</button>
           <ng-template #elseBlock>
             <button class="btn btn-primary" (click)="update()" >Editar</button>
           </ng-template>

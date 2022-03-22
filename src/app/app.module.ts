@@ -8,9 +8,10 @@ import {FooterComponent} from "./components/footer/footer.component";
 import { TasksComponent } from './components/tasks/tasks.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormComponent} from "./components/tasks/form/form.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MaterialModule } from 'material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
