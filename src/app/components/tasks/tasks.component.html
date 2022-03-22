@@ -1,0 +1,42 @@
+<div class="card border-primary mb-3" >
+  <div class="card-header">Tareas</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Tareas</h5>
+    <div class="my-2 text-left">
+      <button type="button" class="btn btn-rounded btn-primary" routerLink="/tasks/form">Crear Tarea</button>
+    </div>
+    <table class="table ">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Titulo</th>
+        <th>Descripcion</th>
+        <th>Fecha de ejecución</th>
+        <th>Dias de retraso</th>
+        <th>Empleado</th>
+        <th>Estado</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let task of tasks">
+      <tr>
+        <td>{{ task.id }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.executionDate }}</td>
+        <td>{{ task.lateDays }}</td>
+        <td>{{ task.employId }}</td>
+        <td>{{ task.state }}</td>
+        <td>
+          <button type="button" class="btn btn-primary" [routerLink]="['/tasks/form', task.id]">Editar</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="delete(task)">Eliminar</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
