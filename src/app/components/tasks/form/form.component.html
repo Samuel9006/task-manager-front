@@ -30,6 +30,7 @@
           </select>
         </div>
       </div>
+      <mat-checkbox class="example-margin"  (change)="setState($event)" >FINALIZADO</mat-checkbox>
       <div class="form-group row">
         <div class="col-sm-6">
           <button class="btn btn-primary" (click)="create()" *ngIf="isAddMode; else elseBlock">Crear</button>

@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import swal from 'sweetalert2';
-import {TaskModel} from "../model/task-model";
-import {TasksService} from "../../../services/tasks.service";
-import {Employ} from "../model/employ";
-import { EmployService } from 'src/app/services/employ.service';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from "@angular/router";
+import { EmployService } from 'src/app/services/employ.service';
+import swal from 'sweetalert2';
+import { TasksService } from "../../../services/tasks.service";
+import { Employ } from "../model/employ";
+import { TaskModel } from "../model/task-model";
 
 @Component({
   selector: 'app-form',
@@ -22,8 +21,8 @@ import { DatePipe } from '@angular/common';
   id!: string;
   public isAddMode!: boolean;
   public empleadoSeleccionado: Employ = new Employ();
-  public titulo: string = "Creacion de tareas"
-
+  public titulo: string = "Creacion de tareas";
+  stateAux: string = 'PENDIENTE';
 
   constructor(private taskService: TasksService,
               private router: Router,
@@ -64,8 +63,7 @@ import { DatePipe } from '@angular/common';
 
   public create(): void{
     this.tasking = this.form.value;
-    console.log("Se inicia la creación");
-    console.log(this.tasking);
+    this.tasking.state = this.stateAux;
     this.taskService.createTask(this.tasking).subscribe(
       (response: any) => {
         this.router.navigate(["/tasks"])
@@ -76,6 +74,7 @@ import { DatePipe } from '@angular/common';
 
   public update():void{
     this.tasking = this.form.value;
+    this.tasking.state = this.stateAux;
     this.tasking.id = +this.id;
     console.log("Se inicia la actualización");
     console.log(this.tasking);
@@ -102,6 +101,10 @@ import { DatePipe } from '@angular/common';
         }
       }
     )
+  }
+
+  public setState(event: any){
+    this.stateAux = event.checked? 'FINALIZADO': 'PENDIENTE';
   }
 
   get f() { return this.form.controls; }
